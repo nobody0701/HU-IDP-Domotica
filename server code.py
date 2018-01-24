@@ -18,7 +18,6 @@ def server_program():
                 #time.sleep(0.5)
                 print(data)
                 data = int(data) + 1
-                data = Data()
                 conn.send(str(data).encode())
             else:
                 print('Fout')
