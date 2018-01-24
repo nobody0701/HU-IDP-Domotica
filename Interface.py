@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Database import *
+import time
 
 
 class Counter_program():
@@ -76,7 +77,8 @@ class Counter_program():
                     stoptstofzuiger = 'Stofzuiger stopt: ' + str(x[5])
                     actief = 'Actief?: ' + str(x[6])
                     opentijdgordijnen = 'Tijd opening: ' + str(x[8])
-                    opengordijnen = 'Open?: ' + str(x[9])
+                    sluittijdgordijnen = 'Tijd sluiten: ' + str(x[9])
+                    opengordijnen = 'Open?: ' + str(x[10])
 
                     ttk.Label(gegevens_frame, text=naambewoner).grid(row=1, column=1, sticky=tk.W)
                     ttk.Label(gegevens_frame, text=kamerid).grid(row=2, column=1, sticky=tk.W)
@@ -92,7 +94,8 @@ class Counter_program():
                     gordijnen_frame = ttk.LabelFrame(gegevens_frame, text="Gordijnen", relief=tk.RIDGE)
                     gordijnen_frame.grid(row=5, column=1)
                     ttk.Label(gordijnen_frame, text=opentijdgordijnen).grid(row=1, column=1, sticky=tk.W)
-                    ttk.Label(gordijnen_frame, text=opengordijnen).grid(row=2, column=1, sticky=tk.W)
+                    ttk.Label(gordijnen_frame, text=sluittijdgordijnen).grid(row=2, column=1, sticky=tk.W)
+                    ttk.Label(gordijnen_frame, text=opengordijnen).grid(row=3, column=1, sticky=tk.W)
                     ttk.Button(gordijnen_frame, text='Wijzigen', command=lambda: gordijnen_wijzigen()).grid(row=4, column=1)
 
                     tk.Button(gegevens_frame, text='Terug', command=combine3).grid(row=6, column=1)
@@ -103,6 +106,7 @@ class Counter_program():
                 def combine5(een, twee, drie):
                     datawijzigen1(een, twee, drie)
                     gegevens_frame.grid_remove()
+                    #time.sleep(0.4)
                     gegevens(naam)
 
                 stofzuigerwijzig = ttk.LabelFrame(gegevens_frame, text="Stofzuiger", relief=tk.RIDGE)
@@ -119,19 +123,24 @@ class Counter_program():
 
             def gordijnen_wijzigen():
                 gordijnen_frame.grid_remove()
-                def combine4(een, twee):
-                    datawijzigen(een, twee)
+                def combine4(een, twee, drie):
+                    datawijzigen(een, twee, drie)
                     gegevens_frame.grid_remove()
+                    #time.sleep(0.4)
                     gegevens(naam)
 
                 gordijnen_frame.grid_remove()
                 gordijnwijzig = ttk.LabelFrame(gegevens_frame, text="Gordijnen", relief=tk.RIDGE)
                 gordijnwijzig.grid(row=5, column=1)
                 ttk.Label(gordijnwijzig, text='Tijd opening:').grid(row=1, column=1, sticky=tk.W)
-                entrytijd = ttk.Entry(gordijnwijzig, width=7)
-                entrytijd.grid(row=1, column=2)
-                entrytijd.insert(tk.END, str(x[8]))
-                ttk.Button(gordijnwijzig, text='Wijzigen', command=lambda: combine4(str(entrytijd.get()), str(x[0]))).grid(row=4, column=1)
+                entrytijdopen = ttk.Entry(gordijnwijzig, width=7)
+                entrytijdopen.grid(row=1, column=2)
+                entrytijdopen.insert(tk.END, str(x[8]))
+                ttk.Label(gordijnwijzig, text='Tijd sluiten:').grid(row=2, column=1, sticky=tk.W)
+                entrytijdsluit = ttk.Entry(gordijnwijzig, width=7)
+                entrytijdsluit.grid(row=2, column=2)
+                entrytijdsluit.insert(tk.END, str(x[9]))
+                ttk.Button(gordijnwijzig, text='Wijzigen', command=lambda: combine4(str(entrytijdopen.get()), str(entrytijdsluit.get()), str(x[0]))).grid(row=4, column=1)
 
 
 

@@ -1,5 +1,7 @@
 import socket
-import time
+import time as timu
+
+idaa = str(input('Input ID: '))
 
 def client_program():
     host = socket.gethostname()
@@ -9,13 +11,15 @@ def client_program():
     try:
         client_socket.connect((host, port))
         print("[Socket] Connected to host: " + str(host) + ' port: ' + str(port))
-        data = 0
+        client_socket.send(str(idaa).encode())
+        timu.sleep(0.5)
         while True:
+            data = {1: ('melding', 'alarm'), 2: ('melding', 'napa')}
             client_socket.send(str(data).encode())
-            data = client_socket.recv(1024).decode()
-            #time.sleep(0.5)
-            print(data)
-            data = int(data) + 1
+            ontvangendata = client_socket.recv(1024).decode()
+            ontvangendata = eval(ontvangendata)
+            print(ontvangendata)
+            timu.sleep(0.1)
     except ConnectionResetError:
         print('[Socket] De verbinding is verloren met de doelcomputer')
         input('[Socket] Druk op enter om het opnieuw te proberen')

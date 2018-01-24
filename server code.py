@@ -1,5 +1,6 @@
 import socket
-import time
+import time as timu
+from status import lezenstatus, Status
 
 def server_program():
     host = socket.gethostname()
@@ -10,15 +11,17 @@ def server_program():
     print("[Socket] host: " + str(host) + ' port: ' + str(port))
     try:
         conn, address = server_socket.accept()
-        print("Connection from: " + str(address))
-
+        idaa = conn.recv(1024).decode()
+        print("Connection from: " + str(address) + " with id: " + str(idaa))
         while True:
             data = conn.recv(1024).decode()
             if data:
-                #time.sleep(0.5)
                 print(data)
-                data = int(data) + 1
-                conn.send(str(data).encode())
+                lezenstatus(data, idaa)
+                timu.sleep(0.1)
+                datasend = Status(idaa)
+                #data = int(data) + 1
+                conn.send(str(datasend).encode())
             else:
                 print('Fout')
     except ConnectionResetError:
