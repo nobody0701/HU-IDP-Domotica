@@ -106,7 +106,7 @@ class Counter_program():
                 def combine5(een, twee, drie):
                     datawijzigen1(een, twee, drie)
                     gegevens_frame.grid_remove()
-                    #time.sleep(0.4)
+                    time.sleep(0.3)
                     gegevens(naam)
 
                 stofzuigerwijzig = ttk.LabelFrame(gegevens_frame, text="Stofzuiger", relief=tk.RIDGE)
@@ -126,7 +126,7 @@ class Counter_program():
                 def combine4(een, twee, drie):
                     datawijzigen(een, twee, drie)
                     gegevens_frame.grid_remove()
-                    #time.sleep(0.4)
+                    time.sleep(0.3)
                     gegevens(naam)
 
                 gordijnen_frame.grid_remove()

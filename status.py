@@ -66,3 +66,23 @@ def lezenstatus(data, id):
                         print("aangemaakt")
                 conn.commit()
                 cur.close()
+
+def verbindingverloren(idaa):
+    conn = psycopg2.connect("dbname='idp' user='postgres' host='localhost' password='0000'")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM meldingen")
+    row = cur.fetchall()
+    if row == []:
+        cur.execute("INSERT INTO meldingen(kamerid, meldingtekst) VALUES (" + idaa + ", 'Connect lost');")
+        print('aangemaakt')
+    else:
+        napa = True
+        for a in row:
+            if str(a[0]) == str(idaa) and str(a[1]) == str('Connect lost'):
+                napa = False
+                break
+        if napa:
+            cur.execute("INSERT INTO meldingen(kamerid, meldingtekst) VALUES (" + idaa + ", 'Connect lost');")
+            print("aangemaakt")
+    conn.commit()
+    cur.close()

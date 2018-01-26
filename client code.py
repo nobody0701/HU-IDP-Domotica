@@ -16,10 +16,10 @@ def client_program():
         while True:
             data = {1: ('melding', 'alarm'), 2: ('melding', 'napa')}
             client_socket.send(str(data).encode())
-            ontvangendata = client_socket.recv(1024).decode()
+            ontvangendata = client_socket.recv(128).decode()
             ontvangendata = eval(ontvangendata)
             print(ontvangendata)
-            timu.sleep(0.1)
+            timu.sleep(0.08)
     except ConnectionResetError:
         print('[Socket] De verbinding is verloren met de doelcomputer')
         input('[Socket] Druk op enter om het opnieuw te proberen')
