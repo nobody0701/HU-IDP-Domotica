@@ -3,7 +3,6 @@ import Adafruit_DHT
 import socket
 import time
 import datetime
-import threading
 GPIO.setwarnings(False)    # geen foutmeldinging van de pinnen
 GPIO.setmode(GPIO.BCM)     # gebruik nummering achter GPIO op afbeelding
 GPIO.setup(25, GPIO.IN)    # adafruit
@@ -55,9 +54,7 @@ try:
         if (time > datetime.time(23,01) and time < datetime.time(23,03)): #stofzuiger timer
           led_aan()
 
-        t1 = threading.Thread(target=reveice_message)
-        t1.start()
-        t1.join()
+      
 
 except KeyboardInterrupt:
     GPIO.cleanup()
